@@ -8,16 +8,26 @@ public class Motor implements Serializable {
     private String tipoBujia;
     private String tipoFiltro;
     private float potencia;
+    private float cilindraje;
 
     public Motor(){
     }
 
-    public Motor (String nombreMotor, String descripcionMotor, String tipoBujia, String tipoFiltro, float potencia) {
+    public Motor(String nombreMotor, String descripcionMotor, String tipoBujia, String tipoFiltro, float potencia, float cilindraje) {
         this.nombreMotor = nombreMotor;
         this.descripcionMotor = descripcionMotor;
         this.tipoBujia = tipoBujia;
         this.tipoFiltro = tipoFiltro;
         this.potencia = potencia;
+        this.cilindraje = cilindraje;
+    }
+
+    public float getCilindraje() {
+        return cilindraje;
+    }
+
+    public void setCilindraje(float cilindraje) {
+        this.cilindraje = cilindraje;
     }
 
     public String getNombreMotor () {
