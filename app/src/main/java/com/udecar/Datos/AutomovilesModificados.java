@@ -8,7 +8,7 @@ public class AutomovilesModificados implements Serializable {
     private String nombreFrenosM;
     private String nombreMotorM;
     private String nombreLlantasM;
-    private int imagenAutomovilM;//cambiar para usar BD
+    private String imagenAutomovilM;//cambiar para usar BD
     private float agarreM;
     //motor
     private String descripcionMotorM;
@@ -26,7 +26,7 @@ public class AutomovilesModificados implements Serializable {
     public AutomovilesModificados()  {
     }
 
-    public AutomovilesModificados (String categoriaM, String descripcionM, String nombreAutomovilM, String nombreFrenosM, String nombreMotorM, String nombreLlantasM, int imagenAutomovilM, float agarreM, String descripcionMotorM, String tipoBujiaM, String tipoFiltroM, float potenciaM, String descripcionFrenosM, String tipoValvulasM, float frenadoM, String tipoLlantaM, String descripcionLlantasM) {
+    public AutomovilesModificados(String categoriaM, String descripcionM, String nombreAutomovilM, String nombreFrenosM, String nombreMotorM, String nombreLlantasM, String imagenAutomovilM, float agarreM, String descripcionMotorM, String tipoBujiaM, String tipoFiltroM, float potenciaM, String descripcionFrenosM, String tipoValvulasM, float frenadoM, String tipoLlantaM, String descripcionLlantasM) {
         this.categoriaM = categoriaM;
         this.descripcionM = descripcionM;
         this.nombreAutomovilM = nombreAutomovilM;
@@ -94,11 +94,11 @@ public class AutomovilesModificados implements Serializable {
         this.nombreLlantasM = nombreLlantasM;
     }
 
-    public int getImagenAutomovilM () {
+    public String getImagenAutomovilM() {
         return imagenAutomovilM;
     }
 
-    public void setImagenAutomovilM (int imagenAutomovilM) {
+    public void setImagenAutomovilM(String imagenAutomovilM) {
         this.imagenAutomovilM = imagenAutomovilM;
     }
 

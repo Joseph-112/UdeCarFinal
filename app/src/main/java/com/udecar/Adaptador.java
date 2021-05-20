@@ -90,20 +90,19 @@ public class Adaptador extends BaseAdapter {
 
         Gson gson = new GsonBuilder().setLenient().create();
         //mJasonTextView = findViewById(R.id.jsonText);
-
+        String imagen;
         // OBTENER EL OBJETO POR CADA ITEM A MOSTRAR
         Automovil automovil = (Automovil) getItem(position);
         // CREAMOS E INICIALIZAMOS LOS ELEMENTOS DEL ITEM DE LA LISTA
         convertView = LayoutInflater.from(context).inflate(R.layout.lista_carros, null);
         img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
-        getImages(automovil);
+        Picasso.get().load(automovil.getImagenAutomovil()).into(img_Auto);
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
         // LLENAMOS LOS ELEMENTOS CON LOS VALORES DE CADA ITEM
         String informacion= "Nombre: " + automovil.getNombreAutomovil() + "\n" +
                             "Categoria: " + automovil.getDescripcion() + "\n";
 
-        //img_Auto.setImageResource(automovil.getImagenAutomovil());
         tv_NombreAuto.setText(automovil.getNombreAutomovil());
         tv_InfoAuto.setText(informacion);
 
@@ -239,7 +238,8 @@ public class Adaptador extends BaseAdapter {
         });
     }
 
-    private void getImages(Automovil automovil){
+    private String getImages(Automovil automovil){
+        final String[] url = {""};
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -258,9 +258,12 @@ public class Adaptador extends BaseAdapter {
                 }
                 List<imagenAutos> postList = response.body();
 
-                for (imagenAutos datosImagen : postList){
-                    if(automovil.getNombreAutomovil().equals(datosImagen.getNombreAutomovil()))
-                        Picasso.get().load(datosImagen.getImagenAutomovil()).into(img_Auto);
+                for (int i = 0  ; i<postList.size() ; i++){
+                    if(automovil.getNombreAutomovil().equals(postList.get(i).getNombreAutomovil())){
+                        url[0] = postList.get(i).getImagenAutomovil();
+
+                    }
+                    //Picasso.get().load(datosImagen.getImagenAutomovil()).into(img_Auto);
                 }
             }
 
@@ -269,6 +272,7 @@ public class Adaptador extends BaseAdapter {
                 mJasonTextView.setText(t.getMessage());
             }
         });
+       return url[0];
     }
 
 }

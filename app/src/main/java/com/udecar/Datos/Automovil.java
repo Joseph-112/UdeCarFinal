@@ -8,13 +8,13 @@ public class Automovil implements Serializable{
     private String nombreFrenos;
     private String nombreMotor;
     private String nombreLlantas;
-    private int imagenAutomovil;//cambiar para usar BD
+    private String imagenAutomovil;//cambiar para usar BD
     private float agarre;
 
     public Automovil(){
     }
 
-    public Automovil (String categoria, String descripcion, String nombreAutomovil, String nombreFrenos, String nombreMotor, String nombreLlantas, int imagenAutomovil, float agarre) {
+    public Automovil(String categoria, String descripcion, String nombreAutomovil, String nombreFrenos, String nombreMotor, String nombreLlantas, String imagenAutomovil, float agarre) {
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.nombreAutomovil = nombreAutomovil;
@@ -22,7 +22,7 @@ public class Automovil implements Serializable{
         this.nombreMotor = nombreMotor;
         this.nombreLlantas = nombreLlantas;
         this.imagenAutomovil = imagenAutomovil;
-        this.agarre = agarre ;
+        this.agarre = agarre;
     }
 
     public String getNombreAutomovil() {
@@ -81,11 +81,11 @@ public class Automovil implements Serializable{
         this.agarre = agarre;
     }
 
-    public int getImagenAutomovil () {
+    public String getImagenAutomovil() {
         return imagenAutomovil;
     }
 
-    public void setImagenAutomovil (int imagenAutomovil) {
+    public void setImagenAutomovil(String imagenAutomovil) {
         this.imagenAutomovil = imagenAutomovil;
     }
 }

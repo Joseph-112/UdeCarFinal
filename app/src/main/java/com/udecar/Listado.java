@@ -16,8 +16,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.udecar.Datos.Automovil;
+import com.udecar.Datos.imagenAutos;
+import com.udecar.interfaz.JsonPlaceHolderApi;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Listado extends Fragment {
     private ListView l_Autos;
@@ -51,8 +60,10 @@ public class Listado extends Fragment {
                         nuevoAuto.setNombreMotor(auto.child("nombreMotor").getValue().toString());
                         nuevoAuto.setDescripcion(auto.child("descripcion").getValue().toString());
                         nuevoAuto.setNombreFrenos(auto.child("nombreFrenos").getValue().toString());
-                        nuevoAuto.setImagenAutomovil(Integer.parseInt(auto.child("imagenAutomovil").getValue().toString()));
+
+                        nuevoAuto.setImagenAutomovil(getImages(nuevoAuto.getNombreAutomovil()));
                         nuevoAuto.setCategoria(auto.child("categoria").getValue().toString());
+
                         listaAutos.add(nuevoAuto);
                     }
                     adaptadorLista = new AdaptadorLista(getContext(), listaAutos);
@@ -65,5 +76,41 @@ public class Listado extends Fragment {
             }
         });
 
+    }
+    private String getImages(String nombreAuto){
+        final String[] url = {""};
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        Call<List<imagenAutos>> call = jsonPlaceHolderApi.getImages();
+
+        call.enqueue(new Callback<List<imagenAutos>>() {
+            @Override
+            public void onResponse(Call<List<imagenAutos>> call, Response<List<imagenAutos>> response) {
+                if (!response.isSuccessful()){
+                    //mJasonTextView.setText("Codigo: "+response.code());
+                    return;
+                }
+                List<imagenAutos> postList = response.body();
+
+                for (int i = 0  ; i<postList.size() ; i++){
+                    if(nombreAuto.equals(postList.get(i).getNombreAutomovil())){
+                        url[0] = postList.get(i).getImagenAutomovil();
+
+                    }
+                    //Picasso.get().load(datosImagen.getImagenAutomovil()).into(img_Auto);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<imagenAutos>> call, Throwable t) {
+                //mJasonTextView.setText(t.getMessage());
+            }
+        });
+        return url[0];
     }
 }

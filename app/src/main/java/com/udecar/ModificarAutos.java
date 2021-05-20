@@ -74,7 +74,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
             auto.setNombreMotor(autoModificado.getNombreMotorM());
             auto.setNombreFrenos(autoModificado.getNombreFrenosM());
             auto.setImagenAutomovil(autoModificado.getImagenAutomovilM());
-            auto.setAgarre(autoModificado.getImagenAutomovilM());
+            auto.setAgarre(autoModificado.getAgarreM());
 
             tv_NombreAuto.setText(auto.getNombreAutomovil());
             String informacion= "Categoria: " + auto.getCategoria() + "\n" +
