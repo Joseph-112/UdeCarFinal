@@ -20,8 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class VistaUsuario extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    public static final String user = "name";
-
     private FirebaseAuth firebaseAuth;
     DrawerLayout drawerLayoutR;
     ActionBarDrawerToggle actionBarDrawerToggleR;
@@ -69,18 +67,21 @@ public class VistaUsuario extends AppCompatActivity implements NavigationView.On
             fragmentManagerR = getSupportFragmentManager();
             fragmentTransactionR = fragmentManagerR.beginTransaction();
             fragmentTransactionR.replace(R.id.content_user,new ListaAutosModificables());
+            fragmentTransactionR.addToBackStack(null);
             fragmentTransactionR.commit();
         }
         if(item.getItemId() == R.id.biblioteca_automoviles){
             fragmentManagerR = getSupportFragmentManager();
             fragmentTransactionR = fragmentManagerR.beginTransaction();
             fragmentTransactionR.replace(R.id.content_user,new BibliotecaUsuario());
+            fragmentTransactionR.addToBackStack(null);
             fragmentTransactionR.commit();
         }
         if(item.getItemId() == R.id.cerrar_sesion){
             fragmentManagerR = getSupportFragmentManager();
             fragmentTransactionR = fragmentManagerR.beginTransaction();
             fragmentTransactionR.replace(R.id.content_user,new CerrarSesion());
+            fragmentTransactionR.addToBackStack(null);
             fragmentTransactionR.commit();
         }
         return false;

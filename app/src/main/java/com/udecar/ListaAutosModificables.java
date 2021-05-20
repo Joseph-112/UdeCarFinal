@@ -1,12 +1,9 @@
 package com.udecar;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 import com.udecar.Datos.Automovil;
 import com.udecar.Datos.imagenAutos;
 import com.udecar.interfaz.JsonPlaceHolderApi;
@@ -33,13 +29,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListaAutosModificables extends Fragment {
-
     private ListView lv_autos;
     private Adaptador adaptador;
     private ArrayList<Automovil> listaAutomoviles = new ArrayList<>();
     private ArrayList<imagenAutos> urlImagenes = new ArrayList<>();
     private DatabaseReference dataBase;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,10 +42,8 @@ public class ListaAutosModificables extends Fragment {
         lv_autos = view.findViewById(R.id.lv_autos);
         getImage();
         listarDatos();
-
         return view;
     }
-
     //Conexión con Realtime Database
     private void listarDatos() {
         listaAutomoviles.clear();
@@ -68,37 +60,29 @@ public class ListaAutosModificables extends Fragment {
                         nuevoAuto.setNombreFrenos(auto.child("nombreFrenos").getValue().toString());
                         nuevoAuto.setNombreLlantas(auto.child("nombreLlantas").getValue().toString());
                         nuevoAuto.setAgarre(Float.parseFloat(auto.child("agarreAuto").getValue().toString()));
-
                         for(imagenAutos iterador:urlImagenes){
                             if (iterador.getNombreAutomovil().equals(nuevoAuto.getNombreAutomovil())){
                                 nuevoAuto.setImagenAutomovil(iterador.getImagenAutomovil());
                             }
                         }
-
                         listaAutomoviles.add(nuevoAuto);
                     }
                     adaptador = new Adaptador(getContext(), listaAutomoviles);
                     lv_autos.setAdapter(adaptador);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
     private void getImage(){
-        final String[] url = {""};
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
         Call<List<imagenAutos>> call = jsonPlaceHolderApi.getImages();
-
         call.enqueue(new Callback<List<imagenAutos>>() {
             @Override
             public void onResponse(Call<List<imagenAutos>> call, Response<List<imagenAutos>> response) {
@@ -106,12 +90,10 @@ public class ListaAutosModificables extends Fragment {
                     return;
                 }
                 List<imagenAutos> postList = response.body();
-
                 for (imagenAutos datosImagen : postList){
                         urlImagenes.add(datosImagen);
                 }
             }
-
             @Override
             public void onFailure(Call<List<imagenAutos>> call, Throwable t) {
                 //mJasonTextView.setText(t.getMessage());

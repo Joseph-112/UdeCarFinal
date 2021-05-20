@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav_view);
-
         navigationView.setNavigationItemSelectedListener(this);
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -48,18 +46,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void vistaAdminitrador(View view){
-        Intent myintent = new Intent(MainActivity.this,CrearAutos.class);
-        startActivity(myintent);
-    }
-
-
     @Override
     protected void onStart() {
         firebaseAuth = FirebaseAuth.getInstance();
         super.onStart();
         if (firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(MainActivity.this, VistaUsuario.class));finish();
+            String idUser = firebaseAuth.getCurrentUser().getUid();
+
+            Intent myintent = new Intent(MainActivity.this,VistaUsuario.class);
+
+            //myintent.putExtra("idUser",idUser);
+            startActivity(myintent);
+            finish();
         }else{
             //cargar fragment principal en la actividad
             fragmentManager = getSupportFragmentManager();
@@ -81,19 +79,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId() == R.id.listado){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.content_fragment,new ListaAutosModificables());
+            fragmentTransaction.replace(R.id.content_fragment,new Listado());
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
         if(item.getItemId() == R.id.iniciar_sesion){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.content_fragment,new IniciarSesion());
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
         if(item.getItemId() == R.id.registrarse){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.content_fragment,new Registrarse());
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
         return false;
