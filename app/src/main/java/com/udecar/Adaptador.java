@@ -23,13 +23,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 import com.udecar.Datos.Automovil;
 import com.udecar.Datos.AutomovilesModificados;
 import com.udecar.Datos.Frenos;
 import com.udecar.Datos.Llantas;
 import com.udecar.Datos.Motor;
+import com.udecar.Datos.imagenAutos;
+import com.udecar.interfaz.JsonPlaceHolderApi;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Adaptador extends BaseAdapter {
 
@@ -39,6 +51,9 @@ public class Adaptador extends BaseAdapter {
     private ArrayList<Llantas> arrayLlantas = new ArrayList<>();
     private ArrayList<Frenos> arrayFrenos= new ArrayList<>();
     private Context context;
+    private ImageView img_Auto;
+
+    private TextView mJasonTextView;
 
     private Motor motor = new Motor();
     private Llantas llantas = new Llantas();
@@ -46,6 +61,8 @@ public class Adaptador extends BaseAdapter {
 
     private Bundle datosAEnviar = new Bundle();
     Fragment fragmento = new ModificarAutos();
+
+    private Automovil automovil = new Automovil();
 
     public Adaptador(Context context, ArrayList<Automovil> listaAutos) {
         this.context = context;
@@ -70,11 +87,15 @@ public class Adaptador extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        Gson gson = new GsonBuilder().setLenient().create();
+        //mJasonTextView = findViewById(R.id.jsonText);
+
         // OBTENER EL OBJETO POR CADA ITEM A MOSTRAR
-        final Automovil automovil = (Automovil) getItem(position);
+         automovil = (Automovil) getItem(position);
         // CREAMOS E INICIALIZAMOS LOS ELEMENTOS DEL ITEM DE LA LISTA
         convertView = LayoutInflater.from(context).inflate(R.layout.lista_carros, null);
-        ImageView img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
+        img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
         // LLENAMOS LOS ELEMENTOS CON LOS VALORES DE CADA ITEM
@@ -84,6 +105,8 @@ public class Adaptador extends BaseAdapter {
         //img_Auto.setImageResource(automovil.getImagenAutomovil());
         tv_NombreAuto.setText(automovil.getNombreAutomovil());
         tv_InfoAuto.setText(informacion);
+
+
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +238,37 @@ public class Adaptador extends BaseAdapter {
         });
     }
 
+    private void getImages(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        Call<List<imagenAutos>> call = jsonPlaceHolderApi.getImages();
+
+        call.enqueue(new Callback<List<imagenAutos>>() {
+            @Override
+            public void onResponse(Call<List<imagenAutos>> call, Response<List<imagenAutos>> response) {
+                if (!response.isSuccessful()){
+                    //mJasonTextView.setText("Codigo: "+response.code());
+                    return;
+                }
+                List<imagenAutos> postList = response.body();
+
+                for (imagenAutos datosImagen : postList){
+                    if(automovil.getNombreAutomovil().equals(datosImagen.getNombreAutomovil()))
+                        Picasso.get().load(datosImagen.getImagenAutomovil()).into(img_Auto);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<imagenAutos>> call, Throwable t) {
+                mJasonTextView.setText(t.getMessage());
+            }
+        });
+    }
 
 }
 
