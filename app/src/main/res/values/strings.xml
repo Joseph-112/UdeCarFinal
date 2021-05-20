@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">UdeCar</string>
+    <string name="btnMotor">Modificar motor</string>
+    <string name="btnFrenos">Modificar Frenos</string>
+    <string name="btnTransmision">Modificar Transmision</string>
+    <string name="seleccionBujia">Seleccione una bujia a modificar</string>
+    <string name="btnTerminarModificacion">Terminar</string>
+    <string name="btnGuardarModificacion">Guardar</string>
+    <string name="btnGuardarBujias">Guardar</string>
+    <string name="email">Ingrese un correo electronico</string>
+    <string name="nombre">Ingrese un nombre</string>
+    <string name="contraseña">Ingrese una contraseña</string>
+    <string name="btnRegistrar">Registrarse</string>
+    <string name="btnRegistrarUsuario">Registrar Usuario</string>
+    <string name="btnIngresar">Iniciar Sesion</string>
+    <string name="TextEmail">Ingrese su correo</string>
+    <string name="TextContraseña">Ingrese su contraseña</string>
+    <string name="btnIniciarSesion">Iniciar Sesion</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:title="Principal">
+    <menu>
+        <item   android:id="@+id/inicio"
+                android:title="inicio"
+                android:icon="@drawable/ic_baseline_home_24">
+        </item>
+        <item   android:id="@+id/listado"
+                android:title="Listado de Automoviles"
+                android:icon="@drawable/ic_lista">
+        </item>
+        <item   android:id="@+id/iniciar_sesion"
+                android:title="Iniciar Sesion"
+                android:icon="@drawable/ic_verified_user"
+                android:tooltipText="Iniciar Sesion">
+        </item>
+        <item   android:id="@+id/registrarse"
+                android:title="Registrarse"
+                android:icon="@drawable/ic_person_add">
+        </item>
+
+        <item   android:id="@+id/administrador"
+            android:title="Administrador"
+            android:icon="@drawable/ic_supervised">
+        </item>
+
+    </menu>
+</item>
+
+</menu>
