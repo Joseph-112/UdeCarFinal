@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CrearMotor">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFF9FF">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/txtNombreMotor"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="56dp"
+                android:ems="10"
+                android:hint="Nombre Motor"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/txtCilindraje"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Cilindraje"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNombreMotor" />
+
+            <EditText
+                android:id="@+id/txtPotenciaMotor"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Potencia Motor"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCilindraje" />
+
+            <Spinner
+                android:id="@+id/sp_Filtro"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="32dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPotenciaMotor" />
+
+            <Spinner
+                android:id="@+id/sp_Bujia"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sp_Filtro" />
+
+            <EditText
+                android:id="@+id/txtDescripcion"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Descripcion"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sp_Bujia" />
+
+            <ListView
+                android:id="@+id/lista_motores"
+                android:layout_width="377dp"
+                android:layout_height="293dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.352"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bnCrear" />
+
+            <Button
+                android:id="@+id/bnCrear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Crear"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>
