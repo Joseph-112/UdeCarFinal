@@ -62,7 +62,7 @@ public class Adaptador extends BaseAdapter {
     private Bundle datosAEnviar = new Bundle();
     Fragment fragmento = new ModificarAutos();
 
-    private Automovil automovil = new Automovil();
+
 
     public Adaptador(Context context, ArrayList<Automovil> listaAutos) {
         this.context = context;
@@ -92,10 +92,11 @@ public class Adaptador extends BaseAdapter {
         //mJasonTextView = findViewById(R.id.jsonText);
 
         // OBTENER EL OBJETO POR CADA ITEM A MOSTRAR
-         automovil = (Automovil) getItem(position);
+        Automovil automovil = (Automovil) getItem(position);
         // CREAMOS E INICIALIZAMOS LOS ELEMENTOS DEL ITEM DE LA LISTA
         convertView = LayoutInflater.from(context).inflate(R.layout.lista_carros, null);
         img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
+        getImages(automovil);
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
         // LLENAMOS LOS ELEMENTOS CON LOS VALORES DE CADA ITEM
@@ -238,7 +239,7 @@ public class Adaptador extends BaseAdapter {
         });
     }
 
-    private void getImages(){
+    private void getImages(Automovil automovil){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
                 .addConverterFactory(GsonConverterFactory.create())
