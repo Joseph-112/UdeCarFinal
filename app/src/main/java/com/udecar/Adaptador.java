@@ -100,8 +100,7 @@ public class Adaptador extends BaseAdapter {
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
         // LLENAMOS LOS ELEMENTOS CON LOS VALORES DE CADA ITEM
-        String informacion= "Nombre: " + automovil.getNombreAutomovil() + "\n" +
-                            "Categoria: " + automovil.getDescripcion() + "\n";
+        String informacion= "Categoria: " + automovil.getCategoria() + "\n";
 
         tv_NombreAuto.setText(automovil.getNombreAutomovil());
         tv_InfoAuto.setText(informacion);

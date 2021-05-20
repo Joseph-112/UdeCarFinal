@@ -61,7 +61,7 @@ public class ListaAutosModificables extends Fragment {
                 if (snapshot.exists()){
                     for (DataSnapshot auto : snapshot.getChildren()){
                         Automovil nuevoAuto = new Automovil();
-                        nuevoAuto.setNombreAutomovil(auto.getKey());
+                        nuevoAuto.setNombreAutomovil(auto.child("nombreAutomovil").getValue().toString());
                         nuevoAuto.setCategoria(auto.child("categoria").getValue().toString());
                         nuevoAuto.setDescripcion(auto.child("descripcion").getValue().toString());
                         nuevoAuto.setNombreMotor(auto.child("nombreMotor").getValue().toString());
@@ -103,18 +103,12 @@ public class ListaAutosModificables extends Fragment {
             @Override
             public void onResponse(Call<List<imagenAutos>> call, Response<List<imagenAutos>> response) {
                 if (!response.isSuccessful()){
-                    //mJasonTextView.setText("Codigo: "+response.code());
                     return;
                 }
                 List<imagenAutos> postList = response.body();
 
                 for (imagenAutos datosImagen : postList){
-                    //if (datosImagen.getNombreAutomovil().equals(nombreAuto)) {
-                        //Picasso.get().load(datosImagen.getImagenAutomovil()).into(imagenCarro);
                         urlImagenes.add(datosImagen);
-
-                    //}
-
                 }
             }
 
