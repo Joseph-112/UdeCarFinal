@@ -186,11 +186,11 @@ public class Adaptador extends BaseAdapter {
                 if(snapshot.exists()){
                     for(DataSnapshot templateSnapshot : snapshot.getChildren()){
                         Motor motores = new Motor();
-                        motores.setNombreMotor(templateSnapshot.getKey());
+                        motores.setNombreMotor(templateSnapshot.child("nombreMotor").getValue().toString());
                         motores.setPotencia(Float.parseFloat(templateSnapshot.child("potencia").getValue().toString()));
                         motores.setTipoBujia(templateSnapshot.child("tipoBujia").getValue().toString());
                         motores.setTipoFiltro(templateSnapshot.child("tipoFiltro").getValue().toString());
-                        motores.setDescripcionMotor(templateSnapshot.child("descripcion").getValue().toString());
+                        motores.setDescripcionMotor(templateSnapshot.child("descripcionMotor").getValue().toString());
                         arrayMotores.add(motores);
                     }
                 }
