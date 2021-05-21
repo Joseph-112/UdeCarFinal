@@ -28,6 +28,7 @@ import java.util.List;
 
 public class CrearAutos<categoria> extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+
     private List<Automovil> listAutos = new ArrayList<Automovil>();
     ArrayAdapter<Automovil> arrayAdapterAutos;
 
@@ -106,7 +107,7 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
                 for (DataSnapshot auto : dataSnapshot.getChildren()){
                     Automovil a = auto.getValue(Automovil.class);
                     a.setNombreAutomovil(auto.getKey());
-                   // a.setPesoAutomovil(Float.parseFloat(auto.child("pesoAutomovil").getValue().toString()));
+                    //a.setPesoAutomovil(Float.parseFloat(auto.child("pesoAutomovil").getValue().toString()));
                     a.setNombreMotor(auto.child("nombreMotor").getValue().toString());
                     a.setDescripcion(auto.child("descripcion").getValue().toString());
                     a.setNombreFrenos(auto.child("nombreFrenos").getValue().toString());
@@ -134,7 +135,7 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
         String motor = tipoMotor.getText().toString();
         String descrip = descripcion.getText().toString();
         String categ = sp_Categoria.toString();
-        String pso = peso.getText().toString();
+
 
 
         if (TextUtils.isEmpty(nombre)){
@@ -162,14 +163,12 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
             Automovil a = new Automovil();
             Bujia b = new Bujia();
 
-
-
             a.setNombreAutomovil(nombre);
             a.setNombreFrenos(freno);
             a.setNombreMotor(motor);
             a.setDescripcion(descrip);
             a.setCategoria(categ);
-            //a.setPesoAutomovil(pso);
+
 //Firebase
             databaseReference.child("Automoviles").child(a.getNombreAutomovil()).setValue(a);
             databaseReference.child("Bujia").child(a.getNombreAutomovil()).setValue(a);

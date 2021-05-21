@@ -96,6 +96,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(R.id.content_fragment,new Registrarse());
             fragmentTransaction.commit();
         }
+
+        if(item.getItemId() == R.id.administrador){
+            Intent myintent = new Intent(MainActivity.this,PrincipalAdmi.class);
+            startActivity(myintent);
+
+        }
+
         return false;
     }
 }

@@ -28,26 +28,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/txtCilindraje"
-                android:layout_width="330dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="Cilindraje"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNombreMotor" />
-
-            <EditText
                 android:id="@+id/txtPotenciaMotor"
                 android:layout_width="330dp"
                 android:layout_height="49dp"
                 android:layout_marginTop="32dp"
                 android:ems="10"
                 android:hint="Potencia Motor"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCilindraje" />
 
@@ -104,6 +93,18 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+
+            <EditText
+                android:id="@+id/txtCilindraje"
+                android:layout_width="330dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Cilindraje"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNombreMotor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

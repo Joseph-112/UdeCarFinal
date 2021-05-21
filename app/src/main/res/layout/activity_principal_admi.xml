@@ -7,14 +7,28 @@
     tools:context=".PrincipalAdmi">
 
     <Button
+        android:id="@+id/btnCrearMotor"
+        android:layout_width="260dp"
+        android:layout_height="52dp"
+        android:onClick="vistaCrearMotor"
+        android:text="Crear Motor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <Button
         android:id="@+id/btnCrearAutos"
         android:layout_width="260dp"
         android:layout_height="52dp"
+        android:onClick="vistaCrearAutos"
         android:text="Crear Autos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.364"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.274" />
 </androidx.constraintlayout.widget.ConstraintLayout>
