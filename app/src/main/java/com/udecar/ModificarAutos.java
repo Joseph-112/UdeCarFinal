@@ -12,15 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 import com.udecar.Datos.Automovil;
 import com.udecar.Datos.AutomovilesModificados;
 import com.udecar.Datos.Frenos;
 import com.udecar.Datos.Llantas;
 import com.udecar.Datos.Motor;
+
+import java.util.Random;
 
 public class ModificarAutos extends Fragment implements View.OnClickListener {
     //componentes
@@ -29,6 +34,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
     private Button botonLlantas;
     private Button botonFrenos;
     private Button botonTerminar;
+    private ImageView img_Auto;
     //private ImageView imgFoto;
 
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -50,6 +56,8 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
     Bundle lantasAuto= new Bundle();
     Bundle frenosAuto= new Bundle();
 
+    String estado ;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +65,8 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
         Bundle datosRecuperados = getArguments();
         autoModificado = (AutomovilesModificados) datosRecuperados.getSerializable("autoMod");
+        estado = datosRecuperados.getString("estado");
+
         if (autoModificado != null) {
             tv_NombreAuto = view.findViewById(R.id.tv_nombreAuto);
             tv_InfoAuto = view.findViewById(R.id.tv_infoAuto);
@@ -65,7 +75,9 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
             botonLlantas = view.findViewById(R.id.btn_modificarLlantas);
             botonFrenos = view.findViewById(R.id.btn_modificarFrenos);
             botonTerminar = view.findViewById(R.id.btn_terminar);
-            //imgFoto = findViewById(R.id.img_imagenAuto);
+            img_Auto = view.findViewById(R.id.img_imagenAuto);
+
+            Picasso.get().load(autoModificado.getImagenAutomovilM()).into(img_Auto);
 
             auto.setCategoria(autoModificado.getCategoriaM());
             auto.setDescripcion(autoModificado.getDescripcionM());
@@ -98,6 +110,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
        switch (v.getId()){
             case R.id.btn_modificarMotor :
                 motorAuto.putSerializable("motorModificar",autoModificado);
+                motorAuto.putString("estado",estado);
                 modificarMotor.setArguments(motorAuto);
 
                 fragmentManagerR = getActivity().getSupportFragmentManager();
@@ -109,6 +122,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
             case R.id.btn_modificarFrenos :
                 frenosAuto.putSerializable("frenosModificar",autoModificado);
+                motorAuto.putString("estado",estado);
                 modificarFrenos.setArguments(frenosAuto);
 
                 fragmentManagerR = getActivity().getSupportFragmentManager();
@@ -121,6 +135,8 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
            case R.id.btn_modificarLlantas :
                lantasAuto.putSerializable("llantasModificar",autoModificado);
+               motorAuto.putString("estado", estado);
+
                modificarLlantas.setArguments(lantasAuto);
 
                fragmentManagerR = getActivity().getSupportFragmentManager();
@@ -134,11 +150,15 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
            case R.id.btn_terminar:
                //guardar en BD autoModificado y el usuario
 
-               /*
-               database.child("AutosModificados").child().setValue(autoModificado);
-               Toast.makeText(getContext(), "Agregado", Toast.LENGTH_SHORT).show();
-               */
-               
+                if(estado.equals("nuevo")){
+                    database.child("AutosModificados").child("Modificados").child(String.valueOf(autoModificado.getIdAuto())).setValue(autoModificado);
+                    Toast.makeText(getContext(), "Agregado", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    database.child("AutosModificados").child("Modificados").child(String.valueOf(autoModificado.getIdAuto())).setValue(autoModificado);
+                    Toast.makeText(getContext(), "Modificado", Toast.LENGTH_SHORT).show();
+                }
+
                fragmentManagerR = getActivity().getSupportFragmentManager();
                fragmentTransactionR = fragmentManagerR.beginTransaction();
                fragmentTransactionR.replace(R.id.content_user,biblioteca);

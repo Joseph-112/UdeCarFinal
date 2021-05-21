@@ -147,13 +147,25 @@
 
             <RelativeLayout
                 android:id="@+id/relativeLayout5"
-                android:layout_width="376dp"
-                android:layout_height="88dp"
+                android:layout_width="381dp"
+                android:layout_height="120dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:background="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
+
+                <TextView
+                    android:id="@+id/label2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/label1"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="7dp"
+                    android:text="Llantas"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/label1"
@@ -163,19 +175,21 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
-                    android:text="Llantas"
+                    android:text="Tipos"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/ddl_listaLlantas"
-                    android:layout_width="264dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="250dp"
+                    android:layout_height="29dp"
+                    android:layout_below="@+id/ddl_Llantas"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginEnd="25dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="34dp"
+                    android:layout_marginBottom="23dp"
                     android:layout_toEndOf="@+id/label1"
                     android:prompt="@string/seleccionBujia"
                     android:spinnerMode="dialog" />
@@ -192,13 +206,22 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/ddl_Llantas"
+                    android:layout_width="259dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginEnd="27dp" />
             </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_guardarModLlantas"
                 android:layout_width="88dp"
                 android:layout_height="36dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/colorPrimary"
                 android:text="Guardar"

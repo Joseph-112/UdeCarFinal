@@ -56,7 +56,7 @@ public class ModificarFrenosAuto extends Fragment implements View.OnClickListene
     private ArrayList<String> valvulas = new ArrayList<>();
 
     private String valvulaSeleccionada ;
-    String valvulaMod ;
+    String valvulaMod , estado ;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_modificar_frenos_auto,container,false);
@@ -64,6 +64,7 @@ public class ModificarFrenosAuto extends Fragment implements View.OnClickListene
         Bundle datosRecuperados = getArguments();
 
         autoModificado = (AutomovilesModificados) datosRecuperados.getSerializable("frenosModificar");
+        estado = datosRecuperados.getString("estado");
 
         frenosAuto.setNombreFrenos(autoModificado.getNombreFrenosM());
         frenosAuto.setTipoValvulas(autoModificado.getTipoValvulasM());
@@ -197,6 +198,7 @@ public class ModificarFrenosAuto extends Fragment implements View.OnClickListene
 
                 Fragment fragment = new ModificarAutos();
                 frenosMod.putSerializable("autoMod",autoModificado);
+                frenosMod.putString("estado", estado);
 
                 fragment.setArguments(frenosMod);
                 fragmentManagerF = getActivity().getSupportFragmentManager();

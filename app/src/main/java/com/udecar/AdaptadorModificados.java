@@ -2,13 +2,13 @@ package com.udecar;
 /*
 Clase que permite llenar la lista dinamica de automoviles
  */
+
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,10 +43,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Adaptador extends BaseAdapter {
+public class AdaptadorModificados extends BaseAdapter {
 
     private DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
-    private ArrayList<Automovil> listaAutos;
+    private ArrayList<AutomovilesModificados> listaAutos;
     private ArrayList<Motor> arrayMotores = new ArrayList<>();
     private ArrayList<Llantas> arrayLlantas = new ArrayList<>();
     private ArrayList<Frenos> arrayFrenos= new ArrayList<>();
@@ -64,7 +64,7 @@ public class Adaptador extends BaseAdapter {
 
 
 
-    public Adaptador(Context context, ArrayList<Automovil> listaAutos) {
+    public AdaptadorModificados (Context context, ArrayList<AutomovilesModificados> listaAutos) {
         this.context = context;
         this.listaAutos = listaAutos;
         listarDatos();
@@ -92,17 +92,17 @@ public class Adaptador extends BaseAdapter {
         //mJasonTextView = findViewById(R.id.jsonText);
         String imagen;
         // OBTENER EL OBJETO POR CADA ITEM A MOSTRAR
-        Automovil automovil = (Automovil) getItem(position);
+        AutomovilesModificados automovil = (AutomovilesModificados) getItem(position);
         // CREAMOS E INICIALIZAMOS LOS ELEMENTOS DEL ITEM DE LA LISTA
         convertView = LayoutInflater.from(context).inflate(R.layout.lista_carros, null);
         img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
-        Picasso.get().load(automovil.getImagenAutomovil()).into(img_Auto);
+        Picasso.get().load(automovil.getImagenAutomovilM()).into(img_Auto);
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
         // LLENAMOS LOS ELEMENTOS CON LOS VALORES DE CADA ITEM
-        String informacion= "Categoria: " + automovil.getCategoria() + "\n";
+        String informacion= "Categoria: " + automovil.getCategoriaM() + "\n";
 
-        tv_NombreAuto.setText(automovil.getNombreAutomovil());
+        tv_NombreAuto.setText(automovil.getNombreAutomovilM());
         tv_InfoAuto.setText(informacion);
 
 
@@ -110,59 +110,9 @@ public class Adaptador extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((motor != null) && (automovil != null) && (llantas != null)) {
-                    for (int i=0;i<arrayMotores.size();i++) {
-                        if (automovil.getNombreMotor().equals(arrayMotores.get(i).getNombreMotor())) {
-                            motor.setNombreMotor(arrayMotores.get(i).getNombreMotor());
-                            motor.setPotencia(arrayMotores.get(i).getPotencia());
-                            motor.setTipoBujia(arrayMotores.get(i).getTipoBujia());
-                            motor.setTipoFiltro(arrayMotores.get(i).getTipoFiltro());
-                            motor.setDescripcionMotor(arrayMotores.get(i).getDescripcionMotor());
-                        }
-                    }
 
-                    for (int i=0;i<arrayLlantas.size();i++) {
-                        if (automovil.getNombreLlantas().equals(arrayLlantas.get(i).getNombreLlantas())) {
-                            llantas.setNombreLlantas(arrayLlantas.get(i).getNombreLlantas());
-                            llantas.setTipoLlanta(arrayLlantas.get(i).getTipoLlanta());
-                            llantas.setAgarreLlanta(arrayLlantas.get(i).getAgarreLlanta());
-                            llantas.setDescripcionllantas(arrayLlantas.get(i).getDescripcionllantas());
-                        }
-                    }
-
-                    for (int i=0;i<arrayFrenos.size();i++) {
-                        if (automovil.getNombreFrenos().equals(arrayFrenos.get(i).getNombreFrenos())) {
-                            frenos.setNombreFrenos(arrayFrenos.get(i).getNombreFrenos());
-                            frenos.setTipoValvulas(arrayFrenos.get(i).getTipoValvulas());
-                            frenos.setFrenado(arrayFrenos.get(i).getFrenado());
-                            frenos.setDescripcionFrenos(arrayFrenos.get(i).getDescripcionFrenos());
-                        }
-                    }
-
-                    AutomovilesModificados autoModificado = new AutomovilesModificados();
-
-                    autoModificado.setCategoriaM(automovil.getCategoria());
-                    autoModificado.setDescripcionM(automovil.getDescripcion());
-                    autoModificado.setNombreAutomovilM(automovil.getNombreAutomovil());
-                    autoModificado.setNombreLlantasM(automovil.getNombreLlantas());
-                    autoModificado.setNombreFrenosM(automovil.getNombreFrenos());
-                    autoModificado.setImagenAutomovilM(automovil.getImagenAutomovil());
-                    autoModificado.setAgarreM(automovil.getAgarre());
-
-                    autoModificado.setNombreMotorM(motor.getNombreMotor());
-                    autoModificado.setPotenciaM(motor.getPotencia());
-                    autoModificado.setTipoBujiaM(motor.getTipoBujia());
-                    autoModificado.setTipoFiltroM(motor.getTipoFiltro());
-                    autoModificado.setDescripcionMotorM(motor.getDescripcionMotor());
-
-                    autoModificado.setDescripcionFrenosM(frenos.getDescripcionFrenos());
-                    autoModificado.setTipoValvulasM(frenos.getTipoValvulas());
-                    autoModificado.setFrenadoM(frenos.getFrenado());
-
-                    autoModificado.setTipoLlantaM(llantas.getTipoLlanta());
-                    autoModificado.setDescripcionLlantasM(llantas.getDescripcionllantas());
-
-                    datosAEnviar.putSerializable("autoMod", autoModificado);
+                    datosAEnviar.putSerializable("autoMod", automovil);
+                    datosAEnviar.putString("estado", "creado");
 
                     fragmento.setArguments(datosAEnviar);
                     FragmentManager fragmentManager;
@@ -171,9 +121,6 @@ public class Adaptador extends BaseAdapter {
                     fragmentTransaction.replace(R.id.content_user, fragmento);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                }else{
-                    System.out.println("vacios");
-                }
             }
         });
         return convertView;
@@ -235,43 +182,6 @@ public class Adaptador extends BaseAdapter {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-    }
-
-    private String getImages(Automovil automovil){
-        final String[] url = {""};
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-        Call<List<imagenAutos>> call = jsonPlaceHolderApi.getImages();
-
-        call.enqueue(new Callback<List<imagenAutos>>() {
-            @Override
-            public void onResponse(Call<List<imagenAutos>> call, Response<List<imagenAutos>> response) {
-                if (!response.isSuccessful()){
-                    //mJasonTextView.setText("Codigo: "+response.code());
-                    return;
-                }
-                List<imagenAutos> postList = response.body();
-
-                for (int i = 0  ; i<postList.size() ; i++){
-                    if(automovil.getNombreAutomovil().equals(postList.get(i).getNombreAutomovil())){
-                        url[0] = postList.get(i).getImagenAutomovil();
-
-                    }
-                    //Picasso.get().load(datosImagen.getImagenAutomovil()).into(img_Auto);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<imagenAutos>> call, Throwable t) {
-                mJasonTextView.setText(t.getMessage());
-            }
-        });
-       return url[0];
     }
 
 }
