@@ -123,7 +123,7 @@ public class Adaptador extends BaseAdapter {
 
                     for (int i=0;i<arrayLlantas.size();i++) {
                         if (automovil.getNombreLlantas().equals(arrayLlantas.get(i).getNombreLlantas())) {
-                            llantas.setNombreLlantas(arrayLlantas.get(i).getNombreLlantas());
+                            llantas.setNombreLlanta(arrayLlantas.get(i).getNombreLlantas());
                             llantas.setTipoLlanta(arrayLlantas.get(i).getTipoLlanta());
                             llantas.setAgarreLlanta(arrayLlantas.get(i).getAgarreLlanta());
                             llantas.setDescripcionllantas(arrayLlantas.get(i).getDescripcionllantas());
