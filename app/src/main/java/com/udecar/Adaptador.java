@@ -168,7 +168,7 @@ public class Adaptador extends BaseAdapter {
                     FragmentManager fragmentManager;
                     fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_fragment, fragmento);
+                    fragmentTransaction.replace(R.id.content_user, fragmento);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }else{

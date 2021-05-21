@@ -201,7 +201,7 @@ public class ModificarFrenosAuto extends Fragment implements View.OnClickListene
                 fragment.setArguments(frenosMod);
                 fragmentManagerF = getActivity().getSupportFragmentManager();
                 fragmentTransactionF = fragmentManagerF.beginTransaction();
-                fragmentTransactionF.replace(R.id.content_fragment,fragment);
+                fragmentTransactionF.replace(R.id.content_user,fragment);
                 fragmentTransactionF.addToBackStack(null);
                 fragmentTransactionF.commit();
                 break;

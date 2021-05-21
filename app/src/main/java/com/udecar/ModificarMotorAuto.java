@@ -323,7 +323,7 @@ public class ModificarMotorAuto extends Fragment implements View.OnClickListener
                 fragment.setArguments(motorMod);
                 fragmentManagerR = getActivity().getSupportFragmentManager();
                 fragmentTransactionR = fragmentManagerR.beginTransaction();
-                fragmentTransactionR.replace(R.id.content_fragment,fragment);
+                fragmentTransactionR.replace(R.id.content_user,fragment);
                 fragmentTransactionR.addToBackStack(null);
                 fragmentTransactionR.commit();
                 break;

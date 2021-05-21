@@ -102,7 +102,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
                 fragmentManagerR = getActivity().getSupportFragmentManager();
                 fragmentTransactionR = fragmentManagerR.beginTransaction();
-                fragmentTransactionR.replace(R.id.content_fragment,modificarMotor);
+                fragmentTransactionR.replace(R.id.content_user,modificarMotor);
                 fragmentTransactionR.addToBackStack(null);
                 fragmentTransactionR.commit();
                 break;
@@ -113,7 +113,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
                 fragmentManagerR = getActivity().getSupportFragmentManager();
                 fragmentTransactionR = fragmentManagerR.beginTransaction();
-                fragmentTransactionR.replace(R.id.content_fragment,modificarFrenos);
+                fragmentTransactionR.replace(R.id.content_user,modificarFrenos);
                 fragmentTransactionR.addToBackStack(null);
                 fragmentTransactionR.commit();
 
@@ -125,7 +125,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
                fragmentManagerR = getActivity().getSupportFragmentManager();
                fragmentTransactionR = fragmentManagerR.beginTransaction();
-               fragmentTransactionR.replace(R.id.content_fragment,modificarLlantas);
+               fragmentTransactionR.replace(R.id.content_user,modificarLlantas);
                fragmentTransactionR.addToBackStack(null);
                fragmentTransactionR.commit();
 
@@ -141,7 +141,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
                
                fragmentManagerR = getActivity().getSupportFragmentManager();
                fragmentTransactionR = fragmentManagerR.beginTransaction();
-               fragmentTransactionR.replace(R.id.content_fragment,biblioteca);
+               fragmentTransactionR.replace(R.id.content_user,biblioteca);
                fragmentTransactionR.addToBackStack(null);
                fragmentTransactionR.commit();
 

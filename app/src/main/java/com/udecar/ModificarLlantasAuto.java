@@ -208,7 +208,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
                 fragment.setArguments(llantasMod);
                 fragmentManagerL = getActivity().getSupportFragmentManager();
                 fragmentTransactionL = fragmentManagerL.beginTransaction();
-                fragmentTransactionL.replace(R.id.content_fragment,fragment);
+                fragmentTransactionL.replace(R.id.content_user,fragment);
                 fragmentTransactionL.addToBackStack(null);
                 fragmentTransactionL.commit();
                 break;
