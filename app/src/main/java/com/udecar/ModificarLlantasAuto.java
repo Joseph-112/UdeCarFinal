@@ -67,11 +67,11 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
 
         autoModificado = (AutomovilesModificados) datosRecuperados.getSerializable("llantasModificar");
 
-        llantasAuto.setNombreLlantas(autoModificado.getNombreLlantasM());
+        llantasAuto.setNombreLlanta(autoModificado.getNombreLlantasM());
         llantasAuto.setTipoLlanta(autoModificado.getTipoLlantaM());
-        llantasAuto.setDescripcionllantas(autoModificado.getDescripcionLlantasM());
-        llantasAuto.setAgarreLlanta(autoModificado.getAgarreM());
-        
+        llantasAuto.setDescripcion(autoModificado.getDescripcionLlantasM());
+        llantasAuto.setAgarre(autoModificado.getAgarreM());
+
         //inicializar componentes
         listallantas = (Spinner) view.findViewById(R.id.ddl_listaLlantas);
         labelPorcentaje = view.findViewById(R.id.tv_porcentajeAgarre);
@@ -82,12 +82,12 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
         botonGuardar =  view.findViewById(R.id.btn_guardarModLlantas);
         frmt.setMaximumFractionDigits(3);
         //muestra los datos en pantalla
-        String nombre = llantasAuto.getNombreLlantas();
-        String informacion= "Agarre: " + frmt.format(llantasAuto.getAgarreLlanta()) + "\n" +
+        String nombre = llantasAuto.getNombreLlanta();
+        String informacion= "Agarre: " + frmt.format(llantasAuto.getAgarre()) + "\n" +
                             "Tipo: " + llantasAuto.getTipoLlanta() + "\n";
         labelNombre.setText(nombre);
         labelInfo.setText(informacion);
-        labelAgarreModificado.setText(""+llantasAuto.getAgarreLlanta());
+        labelAgarreModificado.setText(""+llantasAuto.getAgarre());
 
         dataBase.child("Llanta").addValueEventListener(new ValueEventListener() {
             @Override
@@ -109,14 +109,14 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
                                 for (DataSnapshot llantaQuery : snapshot.getChildren()) {
                                     Llantas llantaModificada = llantaQuery.getValue(Llantas.class);
                                     if (llantaModificada.getTipoLlanta().equals(llantas.get(finalI))) {
-                                        agarreLlanta = llantaModificada.getAgarreLlanta();
+                                        agarreLlanta = llantaModificada.getAgarre();
                                     }
                                 }
                             }
                         }
                     }
                 }
-                float ag =llantasAuto.getAgarreLlanta();
+                float ag =llantasAuto.getAgarre();
                 float uno = 1.000f ;
                 float div = (uno + agarreLlanta);
                 agarreOriginal = ag / div ;
@@ -135,8 +135,8 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
                 if (llantaSeleccionada.equals("--Seleccionar--")){
                     agarreAumento = 0;
                     llantaMod = llantasAuto.getTipoLlanta();
-                    nombreLlantas = llantasAuto.getNombreLlantas();
-                    labelAgarreModificado.setText(frmt.format(llantasAuto.getAgarreLlanta()));
+                    nombreLlantas = llantasAuto.getNombreLlanta();
+                    labelAgarreModificado.setText(frmt.format(llantasAuto.getAgarre()));
                 }else {
                     dataBase.child("Llanta").addValueEventListener(new ValueEventListener() {
                         @Override
@@ -145,19 +145,19 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
                                 for (DataSnapshot llantaQuery : snapshot.getChildren()) {
                                     Llantas llantaModificada = llantaQuery.getValue(Llantas.class);
                                     if(llantaSeleccionada.equals(llantasAuto.getTipoLlanta())){
-                                        nombreLlantas = llantasAuto.getNombreLlantas();
+                                        nombreLlantas = llantasAuto.getNombreLlanta();
                                         llantaMod = llantasAuto.getTipoLlanta();
                                         labelPorcentaje.setText("");
                                         agarreAumento = 0 ;
-                                        labelAgarreModificado.setText(frmt.format(llantasAuto.getAgarreLlanta()));
+                                        labelAgarreModificado.setText(frmt.format(llantasAuto.getAgarre()));
                                         Toast.makeText(getContext(),"Ha seleccionado las mismas llantas",Toast.LENGTH_LONG).show();
                                     }else {
                                         if (llantaModificada.getTipoLlanta().equals(llantaSeleccionada)) {
-                                            nombreLlantas = llantaModificada.getNombreLlantas();
-                                            agarreLlanta = llantaModificada.getAgarreLlanta();
-                                            agarreAumento = agarreOriginal * llantaModificada.getAgarreLlanta();
+                                            nombreLlantas = llantaModificada.getNombreLlanta();
+                                            agarreLlanta = llantaModificada.getAgarre();
+                                            agarreAumento = agarreOriginal * llantaModificada.getAgarre();
                                             llantaMod = (llantaModificada.getTipoLlanta());
-                                            labelPorcentaje.setText("Aumenta el agarre original en " + (llantaModificada.getAgarreLlanta() * 100) + "%");
+                                            labelPorcentaje.setText("Aumenta el agarre original en " + (llantaModificada.getAgarre() * 100) + "%");
                                             labelAgarreModificado.setText(frmt.format(agarreOriginal + agarreAumento));
                                         }
                                     }
@@ -188,19 +188,19 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
         switch (v.getId()){
             case R.id.btn_guardarModLlantas:
                 if (agarreAumento == 0) {
-                    agarre = llantasAuto.getAgarreLlanta()  ;
+                    agarre = llantasAuto.getAgarre()  ;
                     llantaMod = llantasAuto.getTipoLlanta();
                 }else {
                     agarre = agarreAumento + agarreOriginal;
                 }
 
-                llantasAuto.setNombreLlantas(nombreLlantas);
-                llantasAuto.setAgarreLlanta(agarre);
+                llantasAuto.setNombreLlanta(nombreLlantas);
+                llantasAuto.setAgarre(agarre);
                 llantasAuto.setTipoLlanta(llantaMod);
 
-                autoModificado.setNombreLlantasM(llantasAuto.getNombreLlantas());
+                autoModificado.setNombreLlantasM(llantasAuto.getNombreLlanta());
                 autoModificado.setTipoLlantaM(llantasAuto.getTipoLlanta());
-                autoModificado.setDescripcionLlantasM(llantasAuto.getDescripcionllantas());
+                autoModificado.setDescripcionLlantasM(llantasAuto.getDescripcion());
 
                 Fragment fragment = new ModificarAutos();
                 llantasMod.putSerializable("autoMod",autoModificado);

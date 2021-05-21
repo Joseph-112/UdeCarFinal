@@ -11,10 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrearMotor"></activity>
+        <activity android:name=".CrearLlantas"></activity>
+        <activity android:name=".CrearValvulas" />
+        <activity android:name=".CrearFiltro" />
+        <activity android:name=".CrearBujia" />
+        <activity android:name=".CrearMotor" />
         <activity
             android:name=".VistaUsuario"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PrincipalAdmi" />
         <activity android:name=".CrearAutos" />
         <activity android:name=".RecuperarContra" />

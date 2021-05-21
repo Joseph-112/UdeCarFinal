@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Frenos implements Serializable{
     private String nombreFrenos;
-    private String descripcionFrenos;
+    private String descripcion;
     private String tipoValvulas;
     private float frenado;
 
@@ -14,7 +14,7 @@ public class Frenos implements Serializable{
 
     public Frenos (String nombreFrenos, String descripcionFrenos, String tipoValvulas, float frenado) {
         this.nombreFrenos = nombreFrenos;
-        this.descripcionFrenos = descripcionFrenos;
+        this.descripcion = descripcionFrenos;
         this.tipoValvulas = tipoValvulas;
         this.frenado = frenado;
     }
@@ -28,11 +28,11 @@ public class Frenos implements Serializable{
     }
 
     public String getDescripcionFrenos () {
-        return descripcionFrenos;
+        return descripcion;
     }
 
     public void setDescripcionFrenos (String descripcionFrenos) {
-        this.descripcionFrenos = descripcionFrenos;
+        this.descripcion = descripcionFrenos;
     }
 
     public String getTipoValvulas () {

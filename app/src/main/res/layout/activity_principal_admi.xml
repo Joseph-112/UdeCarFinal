@@ -7,17 +7,69 @@
     tools:context=".PrincipalAdmi">
 
     <Button
-        android:id="@+id/btnCrearMotor"
+        android:id="@+id/btnCrearLlantas"
         android:layout_width="260dp"
         android:layout_height="52dp"
-        android:onClick="vistaCrearMotor"
-        android:text="Crear Motor"
+        android:onClick="vistaCrearLlantas"
+        android:text="Crear Lantas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.833" />
+
+    <Button
+        android:id="@+id/btnCrearFreno"
+        android:layout_width="260dp"
+        android:layout_height="52dp"
+        android:onClick="vistaCrearValvulas"
+        android:text="Crear Valvulas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651" />
+
+    <Button
+        android:id="@+id/btnCrearFiltro"
+        android:layout_width="260dp"
+        android:layout_height="52dp"
+        android:onClick="vistaCrearFiltro"
+        android:text="Crear Filtro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.364"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
+
+    <Button
+        android:id="@+id/btnCrearBujia"
+        android:layout_width="260dp"
+        android:layout_height="52dp"
+        android:onClick="vistaCrearBujia"
+        android:text="Crear Bujia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379" />
+
+    <Button
+        android:id="@+id/btnCrearMotor"
+        android:layout_width="260dp"
+        android:layout_height="52dp"
+        android:onClick="vistaCrearBujia"
+        android:text="Crear Motor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.264" />
 
     <Button
         android:id="@+id/btnCrearAutos"
@@ -30,5 +82,5 @@
         app:layout_constraintHorizontal_bias="0.364"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
+        app:layout_constraintVertical_bias="0.127" />
 </androidx.constraintlayout.widget.ConstraintLayout>

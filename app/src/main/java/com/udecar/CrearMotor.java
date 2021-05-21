@@ -1,16 +1,12 @@
 package com.udecar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,8 +25,6 @@ import com.udecar.Datos.Filtro;
 import com.udecar.Datos.Motor;
 
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class CrearMotor extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,7 +60,7 @@ public class CrearMotor extends AppCompatActivity implements View.OnClickListene
         nombreMotor = findViewById(R.id.txtNombreMotor);
         cilindraje = findViewById(R.id.txtCilindraje);
         potencia = findViewById(R.id.txtPotenciaMotor);
-        descripcion = findViewById(R.id.txtDescripcion);
+        descripcion = findViewById(R.id.text_Descripcion);
         guardar = findViewById(R.id.bnCrear);
         bujias = findViewById(R.id.sp_Bujia);
         filtros = findViewById(R.id.sp_Filtro);

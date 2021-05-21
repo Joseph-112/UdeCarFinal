@@ -2,16 +2,16 @@ package com.udecar.Datos;
 
 public class Filtro {
     private float potencia;
-    private String tipofiltro;
-    private String descripcionFiltro;
+    private String tipoFiltro;
+    private String descripcion;
 
     public Filtro () {
     }
 
     public Filtro (float potencia, String tipofiltro, String descripcionFiltro) {
         this.potencia = potencia;
-        this.tipofiltro = tipofiltro;
-        this.descripcionFiltro = descripcionFiltro;
+        this.tipoFiltro = tipofiltro;
+        this.descripcion = descripcionFiltro;
     }
 
     public float getPotencia () {
@@ -23,18 +23,18 @@ public class Filtro {
     }
 
     public String getTipofiltro () {
-        return tipofiltro;
+        return tipoFiltro;
     }
 
     public void setTipofiltro (String tipofiltro) {
-        this.tipofiltro = tipofiltro;
+        this.tipoFiltro = tipofiltro;
     }
 
     public String getdescripcionFiltro () {
-        return descripcionFiltro;
+        return descripcion;
     }
 
     public void setdescripcionFiltro (String descripcionFiltro) {
-        this.descripcionFiltro = descripcionFiltro;
+        this.descripcion = descripcionFiltro;
     }
 }

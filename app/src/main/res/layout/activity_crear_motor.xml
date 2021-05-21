@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/sp_Filtro" />
 
             <EditText
-                android:id="@+id/txtDescripcion"
+                android:id="@+id/text_Descripcion"
                 android:layout_width="330dp"
                 android:layout_height="49dp"
                 android:layout_marginTop="32dp"
@@ -92,7 +92,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+                app:layout_constraintTop_toBottomOf="@+id/text_Descripcion" />
 
             <EditText
                 android:id="@+id/txtCilindraje"

@@ -33,18 +33,18 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
     ArrayAdapter<Automovil> arrayAdapterAutos;
 
     private EditText nombreAuto;
-    private EditText tipoFreno;
-    private EditText tipoMotor;
-    private EditText descripcion, peso;
+    private Spinner tipoLlantas;
+    private Spinner tipoMotor;
+    private EditText descripcion;
     private Button btnCrear, btnActualizar;
     private Spinner sp_Categoria;
     private ListView autos;
 
+    private ArrayList<String> tipos = new ArrayList<>();
 
     private ProgressDialog progressDialog;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
 
     Automovil autoSelected;
 
@@ -55,23 +55,27 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_autos);
 
+        dataBase = FirebaseDatabase.getInstance().getReference();
+
         nombreAuto = (EditText) findViewById(R.id.textNombreAuto);
-        tipoFreno = (EditText) findViewById(R.id.txtTipoFreno);
-        tipoMotor = (EditText) findViewById(R.id.txtTipoMotor);
-        descripcion = (EditText) findViewById(R.id.txtDescripcion);
-        peso = (EditText) findViewById(R.id.txtPeso);
+        tipoMotor = (Spinner) findViewById(R.id.spTipoMotor);
+        tipoLlantas =  findViewById(R.id.spTipoLLantas);
+        descripcion = (EditText) findViewById(R.id.text_Descripcion);
+        sp_Categoria = findViewById(R.id.spCategoria);
+
         btnCrear= (Button) findViewById(R.id.btnCrear);
         btnActualizar= (Button) findViewById(R.id.btn_Actualizar);
-        sp_Categoria = findViewById(R.id.spCategoria);
-        sp_Categoria.setOnItemSelectedListener(this);
+
+
+
 
         autos = (ListView) findViewById(R.id.lvAutos);
 
 
-        firebaseDatabase = firebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+
         listAutos();
-        categoria();
+
+
 
 
         btnCrear.setOnClickListener(this);
@@ -83,21 +87,34 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 autoSelected = (Automovil) parent.getItemAtPosition(position);
                 nombreAuto.setText(autoSelected.getNombreAutomovil());
-                tipoFreno.setText(autoSelected.getNombreFrenos());
-                tipoMotor.setText(autoSelected.getNombreMotor());
                 descripcion.setText(autoSelected.getDescripcion());
-                //peso.setText((int) autoSelected.getPesoAutomovil());
+
 
             }
         });
 
 
-    }
-    private void categoria (){
-        String [] categorias ={"Categoria 1", "Categoria 2", "Categoria 3"};
-        sp_Categoria.setAdapter((new ArrayAdapter<String>(CrearAutos.this, android.R.layout.simple_spinner_dropdown_item, categorias)));
+        dataBase.child("NombreLlanta").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tipos.clear();
+                tipos.add("--Seleccionar--");
+                if (snapshot.exists()) {
+                    for (DataSnapshot nombreLlanta : snapshot.getChildren()) {
+                        tipos.add(nombreLlanta.child("nombreLlanta").getValue().toString());
+                    }
+                    ArrayAdapter<String> adaptador = new ArrayAdapter<>(CrearAutos.this, R.layout.support_simple_spinner_dropdown_item, tipos);
+                    tipoLlantas.setAdapter(adaptador);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CrearAutos.this,"Error con la base de datos: Llanta",Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
+
 
     private void listAutos() {
         databaseReference.child("Automoviles").addValueEventListener(new ValueEventListener() {

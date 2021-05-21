@@ -3,43 +3,43 @@ package com.udecar.Datos;
 import java.io.Serializable;
 
 public class Llantas implements Serializable {
-    private String nombreLlantas;
-    private String descripcionllantas;
+    private String nombreLlanta;
+    private String descripcion;
     private String tipoLlanta;
-    private float agarreLlanta;
+    private float agarre;
 
     public Llantas () {
     }
 
-    public Llantas (String nombreLlantas, String descripcionllantas, float agarreLlanta, String tipoLlanta) {
-        this.nombreLlantas = nombreLlantas;
-        this.descripcionllantas = descripcionllantas;
-        this.agarreLlanta = agarreLlanta;
+    public Llantas (String nombreLlanta, String descripcion, float agarre, String tipoLlanta) {
+        this.nombreLlanta = nombreLlanta;
+        this.descripcion = descripcion;
+        this.agarre = agarre;
         this.tipoLlanta = tipoLlanta;
     }
 
-    public String getNombreLlantas () {
-        return nombreLlantas;
+    public String getNombreLlanta () {
+        return nombreLlanta;
     }
 
-    public void setNombreLlantas (String nombreLlantas) {
-        this.nombreLlantas = nombreLlantas;
+    public void setNombreLlanta (String nombreLlanta) {
+        this.nombreLlanta = nombreLlanta;
     }
 
-    public String getDescripcionllantas () {
-        return descripcionllantas;
+    public String getDescripcion () {
+        return descripcion;
     }
 
-    public void setDescripcionllantas (String descripcionllantas) {
-        this.descripcionllantas = descripcionllantas;
+    public void setDescripcion (String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public float getAgarreLlanta () {
-        return agarreLlanta;
+    public float getAgarre () {
+        return agarre;
     }
 
-    public void setAgarreLlanta (float agarreLlanta) {
-        this.agarreLlanta = agarreLlanta;
+    public void setAgarre (float agarre) {
+        this.agarre = agarre;
     }
 
     public String getTipoLlanta () {

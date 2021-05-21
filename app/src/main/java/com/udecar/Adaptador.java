@@ -122,11 +122,11 @@ public class Adaptador extends BaseAdapter {
                     }
 
                     for (int i=0;i<arrayLlantas.size();i++) {
-                        if (automovil.getNombreLlantas().equals(arrayLlantas.get(i).getNombreLlantas())) {
-                            llantas.setNombreLlantas(arrayLlantas.get(i).getNombreLlantas());
+                        if (automovil.getNombreLlantas().equals(arrayLlantas.get(i).getNombreLlanta())) {
+                            llantas.setNombreLlanta(arrayLlantas.get(i).getNombreLlanta());
                             llantas.setTipoLlanta(arrayLlantas.get(i).getTipoLlanta());
-                            llantas.setAgarreLlanta(arrayLlantas.get(i).getAgarreLlanta());
-                            llantas.setDescripcionllantas(arrayLlantas.get(i).getDescripcionllantas());
+                            llantas.setAgarre(arrayLlantas.get(i).getAgarre());
+                            llantas.setDescripcion(arrayLlantas.get(i).getDescripcion());
                         }
                     }
 
@@ -160,7 +160,7 @@ public class Adaptador extends BaseAdapter {
                     autoModificado.setFrenadoM(frenos.getFrenado());
 
                     autoModificado.setTipoLlantaM(llantas.getTipoLlanta());
-                    autoModificado.setDescripcionLlantasM(llantas.getDescripcionllantas());
+                    autoModificado.setDescripcionLlantasM(llantas.getDescripcion());
 
                     datosAEnviar.putSerializable("autoMod", autoModificado);
 
@@ -205,10 +205,10 @@ public class Adaptador extends BaseAdapter {
                 if(snapshot.exists()){
                     for(DataSnapshot templateSnapshot : snapshot.getChildren()){
                         Llantas llanta = new Llantas();
-                        llanta.setNombreLlantas(templateSnapshot.child("nombreLlanta").getValue().toString());
+                        llanta.setNombreLlanta(templateSnapshot.child("nombreLlanta").getValue().toString());
                         llanta.setTipoLlanta(templateSnapshot.child("tipoLlanta").getValue().toString());
-                        llanta.setDescripcionllantas(templateSnapshot.child("descripcion").getValue().toString());
-                        llanta.setAgarreLlanta(Float.parseFloat(templateSnapshot.child("agarre").getValue().toString()));
+                        llanta.setDescripcion(templateSnapshot.child("descripcion").getValue().toString());
+                        llanta.setAgarre(Float.parseFloat(templateSnapshot.child("agarre").getValue().toString()));
                         arrayLlantas.add(llanta);
                     }
                 }

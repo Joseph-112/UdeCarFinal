@@ -29,4 +29,23 @@ public class PrincipalAdmi extends AppCompatActivity {
         Intent myintent = new Intent(PrincipalAdmi.this, CrearMotor.class);
         startActivity(myintent);
     }
+    public void vistaCrearBujia(View view){
+        Intent myintent = new Intent(PrincipalAdmi.this, CrearBujia.class);
+        startActivity(myintent);
+    }
+
+    public void vistaCrearFiltro(View view){
+        Intent myintent = new Intent(PrincipalAdmi.this, CrearFiltro.class);
+        startActivity(myintent);
+    }
+
+    public void vistaCrearValvulas(View view){
+        Intent myintent = new Intent(PrincipalAdmi.this, CrearValvulas.class);
+        startActivity(myintent);
+    }
+
+    public void vistaCrearLlantas(View view){
+        Intent myintent = new Intent(PrincipalAdmi.this, CrearLlantas.class);
+        startActivity(myintent);
+    }
 }
