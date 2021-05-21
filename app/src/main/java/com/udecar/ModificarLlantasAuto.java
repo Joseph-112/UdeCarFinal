@@ -35,6 +35,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
 
     private DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
     private Spinner listallantas;
+    private Spinner tiposllantas;
 
     private TextView labelNombre;
     private TextView labelInfo;
@@ -56,8 +57,10 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
     private DecimalFormat frmt = new DecimalFormat();
 
     private ArrayList<String> llantas = new ArrayList<>();
+    private ArrayList<Llantas> aux = new ArrayList<>();
+    private ArrayList<String> tipos = new ArrayList<>();
 
-    private String llantaSeleccionada ;
+    private String llantaSeleccionada , tipoSeleccionado;
     String llantaMod , estado ;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
         
         //inicializar componentes
         listallantas = (Spinner) view.findViewById(R.id.ddl_listaLlantas);
+        tiposllantas = (Spinner) view.findViewById(R.id.ddl_Llantas);
         labelPorcentaje = view.findViewById(R.id.tv_porcentajeAgarre);
         labelAgarreModificado = view.findViewById(R.id.tv_agarreModificado);
         
@@ -90,46 +94,67 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
         labelInfo.setText(informacion);
         labelAgarreModificado.setText(""+llantasAuto.getAgarreLlanta());
 
-        dataBase.child("Llanta").addValueEventListener(new ValueEventListener() {
+        dataBase.child("TiposLlantas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                llantas.clear();
-                llantas.add("--Seleccionar--");
-                if (snapshot.exists()){
-                    for(DataSnapshot llanta : snapshot.getChildren()){
-                        Llantas llantasSpinner = llanta.getValue(Llantas.class);
-                        llantas.add(llantasSpinner.getTipoLlanta());
+                tipos.clear();
+                tipos.add("--Seleccionar--");
+                if (snapshot.exists()) {
+                    for (DataSnapshot tipollanta : snapshot.getChildren()) {
+                        tipos.add(tipollanta.child("nombreTipo").getValue().toString());
                     }
-                    ArrayAdapter<String> adaptador = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, llantas);
-                    listallantas.setAdapter(adaptador);
-
-                    for (int i=0 ; i<llantas.size() ; i++) {
-                        if (llantasAuto.getTipoLlanta().equals(llantas.get(i))) {
-                            final int finalI = i;
-                            if (snapshot.exists()) {
-                                for (DataSnapshot llantaQuery : snapshot.getChildren()) {
-                                    Llantas llantaModificada = llantaQuery.getValue(Llantas.class);
-                                    if (llantaModificada.getTipoLlanta().equals(llantas.get(finalI))) {
-                                        agarreLlanta = llantaModificada.getAgarreLlanta();
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    ArrayAdapter<String> adaptador = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, tipos);
+                    tiposllantas.setAdapter(adaptador);
                 }
-                float ag =llantasAuto.getAgarreLlanta();
-                float uno = 1.000f ;
-                float div = (uno + agarreLlanta);
-                agarreOriginal = ag / div ;
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getContext(),"Error con la base de datos: Llanta",Toast.LENGTH_LONG).show();
             }
         });
-        
-        listallantas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        dataBase.child("Llanta").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                aux.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot llanta : snapshot.getChildren()) {
+                        Llantas llantaModificada = llanta.getValue(Llantas.class);
+                        aux.add(llantaModificada);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),"Error con la base de datos: Llanta",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        tiposllantas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tipoSeleccionado = tiposllantas.getSelectedItem().toString();
+                if(tipoSeleccionado.equals("--Seleccionar--")){
+                    Toast.makeText(getContext(), "Seleccione un tipo", Toast.LENGTH_LONG).show();
+                }else{
+                    llantas.clear();
+                    llantas.add("--Seleccionar--");
+                    for(int i = 0; i < aux.size(); i++){
+                        if(tipoSeleccionado.equals(aux.get(i).getTipoLlanta())){
+                            llantas.add(aux.get(i).getTipoLlanta());
+                        }
+                        ArrayAdapter<String> adaptador = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, llantas);
+                        listallantas.setAdapter(adaptador);
+                    }
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        /*listallantas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 llantaSeleccionada = listallantas.getSelectedItem().toString();
@@ -139,6 +164,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
                     nombreLlantas = llantasAuto.getNombreLlantas();
                     labelAgarreModificado.setText(frmt.format(llantasAuto.getAgarreLlanta()));
                 }else {
+
                     dataBase.child("Llanta").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -177,8 +203,8 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });
-        
+        });*/
+
         botonGuardar.setOnClickListener(this);
         return view;
     }
