@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +30,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListaAutosModificables extends Fragment {
+    private FirebaseAuth firebaseAuth;
     private ListView lv_autos;
     private Adaptador adaptador;
     private ArrayList<Automovil> listaAutomoviles = new ArrayList<>();
@@ -46,6 +48,7 @@ public class ListaAutosModificables extends Fragment {
     }
     //Conexión con Realtime Database
     private void listarDatos() {
+        firebaseAuth = FirebaseAuth.getInstance();
         listaAutomoviles.clear();
         dataBase.child("Automoviles").addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,7 +70,8 @@ public class ListaAutosModificables extends Fragment {
                         }
                         listaAutomoviles.add(nuevoAuto);
                     }
-                    adaptador = new Adaptador(getContext(), listaAutomoviles);
+                    String idUser = firebaseAuth.getCurrentUser().getUid();
+                    adaptador = new Adaptador(getContext(), listaAutomoviles, idUser);
                     lv_autos.setAdapter(adaptador);
                 }
             }

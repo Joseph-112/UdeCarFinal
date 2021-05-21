@@ -93,6 +93,8 @@ public class CrearAutos<categoria> extends AppCompatActivity implements View.OnC
 
 
     }
+
+
     private void categoria (){
         String [] categorias ={"Categoria 1", "Categoria 2", "Categoria 3"};
         sp_Categoria.setAdapter((new ArrayAdapter<String>(CrearAutos.this, android.R.layout.simple_spinner_dropdown_item, categorias)));

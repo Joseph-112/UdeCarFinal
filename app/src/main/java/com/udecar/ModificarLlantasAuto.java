@@ -58,7 +58,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
     private ArrayList<String> llantas = new ArrayList<>();
 
     private String llantaSeleccionada ;
-    String llantaMod ;
+    String llantaMod , estado ;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_modificar_llantas_auto,container,false);
@@ -66,6 +66,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
         Bundle datosRecuperados = getArguments();
 
         autoModificado = (AutomovilesModificados) datosRecuperados.getSerializable("llantasModificar");
+        estado = datosRecuperados.getString("estado");
 
         llantasAuto.setNombreLlantas(autoModificado.getNombreLlantasM());
         llantasAuto.setTipoLlanta(autoModificado.getTipoLlantaM());
@@ -204,6 +205,7 @@ public class ModificarLlantasAuto extends Fragment implements View.OnClickListen
 
                 Fragment fragment = new ModificarAutos();
                 llantasMod.putSerializable("autoMod",autoModificado);
+                llantasMod.putString("estado", estado);
 
                 fragment.setArguments(llantasMod);
                 fragmentManagerL = getActivity().getSupportFragmentManager();

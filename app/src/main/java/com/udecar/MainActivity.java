@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         if (firebaseAuth.getCurrentUser() != null){
             String idUser = firebaseAuth.getCurrentUser().getUid();
-
+            System.out.println(idUser);
             Intent myintent = new Intent(MainActivity.this,VistaUsuario.class);
 
             //myintent.putExtra("idUser",idUser);

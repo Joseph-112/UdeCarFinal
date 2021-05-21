@@ -69,6 +69,7 @@ public class ModificarMotorAuto extends Fragment implements View.OnClickListener
     private String filtroSeleccionado ;
     String bujiaMod ;
     String filtroMod ;
+    String estado ;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_modificar_motor_auto,container,false);
@@ -76,6 +77,7 @@ public class ModificarMotorAuto extends Fragment implements View.OnClickListener
         Bundle datosRecuperados = getArguments();
 
         autoModificado = (AutomovilesModificados) datosRecuperados.getSerializable("motorModificar");
+        estado = datosRecuperados.getString("estado");
 
         motorAuto.setNombreMotor(autoModificado.getNombreMotorM());
         motorAuto.setPotencia(autoModificado.getPotenciaM());
@@ -319,6 +321,7 @@ public class ModificarMotorAuto extends Fragment implements View.OnClickListener
 
                 Fragment fragment = new ModificarAutos();
                 motorMod.putSerializable("autoMod",autoModificado);
+                motorMod.putString("estado",estado);
 
                 fragment.setArguments(motorMod);
                 fragmentManagerR = getActivity().getSupportFragmentManager();
