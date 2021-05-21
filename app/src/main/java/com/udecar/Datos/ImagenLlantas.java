@@ -5,6 +5,7 @@ public class ImagenLlantas {
     public ImagenLlantas(String nombreLlantas, String imagenLlantas) {
         this.nombreLlantas = nombreLlantas;
         this.imagenLlantas = imagenLlantas;
+
     }
     public ImagenLlantas() {
     }
