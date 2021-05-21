@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             System.out.println(idUser);
             Intent myintent = new Intent(MainActivity.this,VistaUsuario.class);
 
-            //myintent.putExtra("idUser",idUser);
+
             startActivity(myintent);
             finish();
         }else{

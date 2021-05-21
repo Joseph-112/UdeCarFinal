@@ -152,10 +152,10 @@ public class AdaptadorModificados extends BaseAdapter {
                 if(snapshot.exists()){
                     for(DataSnapshot templateSnapshot : snapshot.getChildren()){
                         Llantas llanta = new Llantas();
-                        llanta.setNombreLlantas(templateSnapshot.child("nombreLlanta").getValue().toString());
+                        llanta.setNombreLlanta(templateSnapshot.child("nombreLlanta").getValue().toString());
                         llanta.setTipoLlanta(templateSnapshot.child("tipoLlanta").getValue().toString());
-                        llanta.setDescripcionllantas(templateSnapshot.child("descripcion").getValue().toString());
-                        llanta.setAgarreLlanta(Float.parseFloat(templateSnapshot.child("agarre").getValue().toString()));
+                        llanta.setDescripcion(templateSnapshot.child("descripcion").getValue().toString());
+                        llanta.setAgarre(Float.parseFloat(templateSnapshot.child("agarre").getValue().toString()));
                         arrayLlantas.add(llanta);
                     }
                 }

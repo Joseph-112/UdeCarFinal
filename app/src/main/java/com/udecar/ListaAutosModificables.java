@@ -40,6 +40,8 @@ public class ListaAutosModificables extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_autos_modificables, container, false);
+        Bundle dato = new Bundle();
+
         dataBase = FirebaseDatabase.getInstance().getReference();
         lv_autos = view.findViewById(R.id.lv_autos);
         getImage();
@@ -62,7 +64,7 @@ public class ListaAutosModificables extends Fragment {
                         nuevoAuto.setNombreMotor(auto.child("nombreMotor").getValue().toString());
                         nuevoAuto.setNombreFrenos(auto.child("nombreFrenos").getValue().toString());
                         nuevoAuto.setNombreLlantas(auto.child("nombreLlantas").getValue().toString());
-                        nuevoAuto.setAgarre(Float.parseFloat(auto.child("agarreAuto").getValue().toString()));
+                        nuevoAuto.setAgarre(Float.parseFloat(auto.child("agarre").getValue().toString()));
                         for(imagenAutos iterador:urlImagenes){
                             if (iterador.getNombreAutomovil().equals(nuevoAuto.getNombreAutomovil())){
                                 nuevoAuto.setImagenAutomovil(iterador.getImagenAutomovil());

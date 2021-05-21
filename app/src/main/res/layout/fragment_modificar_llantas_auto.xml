@@ -129,8 +129,7 @@
                     android:layout_below="@+id/tv_nombreLlantas"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="14dp"
-                    android:layout_marginTop="19dp"
-                    app:srcCompat="@drawable/motor" />
+                    android:layout_marginTop="19dp" />
 
                 <TextView
                     android:id="@+id/infoLlantas"
@@ -181,15 +180,15 @@
 
                 <Spinner
                     android:id="@+id/ddl_listaLlantas"
-                    android:layout_width="250dp"
-                    android:layout_height="29dp"
+                    android:layout_width="253dp"
+                    android:layout_height="42dp"
                     android:layout_below="@+id/ddl_Llantas"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="34dp"
-                    android:layout_marginBottom="23dp"
+                    android:layout_marginEnd="31dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@+id/label1"
                     android:prompt="@string/seleccionBujia"
                     android:spinnerMode="dialog" />

@@ -21,7 +21,7 @@ public class PrincipalAdmi extends AppCompatActivity {
     }
 
     public void vistaCrearAutos(View view){
-        Intent myintent = new Intent(PrincipalAdmi.this, CrearAutos.class);
+        Intent myintent = new Intent(PrincipalAdmi.this, CrearAuto.class);
         startActivity(myintent);
     }
 

@@ -59,7 +59,6 @@ public class IniciarSesion extends Fragment {
                 }else{
                     Toast.makeText(getContext(), "Por Llenar todos los campos", Toast.LENGTH_SHORT).show();
                 }
-                startActivity(new Intent(getContext(), VistaUsuario.class));
             }
         });
         btnRecuperar.setOnClickListener(new View.OnClickListener() {

@@ -66,7 +66,6 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
         Bundle datosRecuperados = getArguments();
         autoModificado = (AutomovilesModificados) datosRecuperados.getSerializable("autoMod");
         estado = datosRecuperados.getString("estado");
-
         if (autoModificado != null) {
             tv_NombreAuto = view.findViewById(R.id.tv_nombreAuto);
             tv_InfoAuto = view.findViewById(R.id.tv_infoAuto);
@@ -122,7 +121,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
             case R.id.btn_modificarFrenos :
                 frenosAuto.putSerializable("frenosModificar",autoModificado);
-                motorAuto.putString("estado",estado);
+                frenosAuto.putString("estado",estado);
                 modificarFrenos.setArguments(frenosAuto);
 
                 fragmentManagerR = getActivity().getSupportFragmentManager();
@@ -135,7 +134,7 @@ public class ModificarAutos extends Fragment implements View.OnClickListener {
 
            case R.id.btn_modificarLlantas :
                lantasAuto.putSerializable("llantasModificar",autoModificado);
-               motorAuto.putString("estado", estado);
+               lantasAuto.putString("estado", estado);
 
                modificarLlantas.setArguments(lantasAuto);
 
