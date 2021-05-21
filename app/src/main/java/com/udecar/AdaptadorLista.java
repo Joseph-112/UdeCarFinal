@@ -60,6 +60,7 @@ public class AdaptadorLista extends BaseAdapter {
         ImageView img_Auto= (ImageView) convertView.findViewById(R.id.img_Auto);
         img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
         Picasso.get().load(automovil.getImagenAutomovil()).into(img_Auto);
+
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
         // LLENAMOS LOS ELEMENTOS CON LOS VALORES DE CADA ITEM

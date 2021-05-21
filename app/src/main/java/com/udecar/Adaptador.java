@@ -52,7 +52,6 @@ public class Adaptador extends BaseAdapter {
     private ArrayList<Llantas> arrayLlantas = new ArrayList<>();
     private ArrayList<Frenos> arrayFrenos= new ArrayList<>();
     private Context context;
-    private ImageView img_Auto;
     private String idUser ;
 
     private TextView mJasonTextView;
@@ -94,12 +93,11 @@ public class Adaptador extends BaseAdapter {
 
         Gson gson = new GsonBuilder().setLenient().create();
         //mJasonTextView = findViewById(R.id.jsonText);
-        String imagen;
         // OBTENER EL OBJETO POR CADA ITEM A MOSTRAR
         Automovil automovil = (Automovil) getItem(position);
         // CREAMOS E INICIALIZAMOS LOS ELEMENTOS DEL ITEM DE LA LISTA
         convertView = LayoutInflater.from(context).inflate(R.layout.lista_carros, null);
-        img_Auto = (ImageView) convertView.findViewById(R.id.img_Auto);
+        ImageView img_Auto= (ImageView) convertView.findViewById(R.id.img_Auto);
         Picasso.get().load(automovil.getImagenAutomovil()).into(img_Auto);
         TextView tv_NombreAuto = (TextView) convertView.findViewById(R.id.tv_NombreAuto);
         TextView tv_InfoAuto = (TextView) convertView.findViewById(R.id.tv_InfoAuto);
@@ -244,42 +242,6 @@ public class Adaptador extends BaseAdapter {
         });
     }
 
-    private String getImages(Automovil automovil){
-        final String[] url = {""};
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/Joseph-112/imagenesUdeCar/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-        Call<List<imagenAutos>> call = jsonPlaceHolderApi.getImages();
-
-        call.enqueue(new Callback<List<imagenAutos>>() {
-            @Override
-            public void onResponse(Call<List<imagenAutos>> call, Response<List<imagenAutos>> response) {
-                if (!response.isSuccessful()){
-                    //mJasonTextView.setText("Codigo: "+response.code());
-                    return;
-                }
-                List<imagenAutos> postList = response.body();
-
-                for (int i = 0  ; i<postList.size() ; i++){
-                    if(automovil.getNombreAutomovil().equals(postList.get(i).getNombreAutomovil())){
-                        url[0] = postList.get(i).getImagenAutomovil();
-
-                    }
-                    //Picasso.get().load(datosImagen.getImagenAutomovil()).into(img_Auto);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<imagenAutos>> call, Throwable t) {
-                mJasonTextView.setText(t.getMessage());
-            }
-        });
-       return url[0];
-    }
 
 }
 
